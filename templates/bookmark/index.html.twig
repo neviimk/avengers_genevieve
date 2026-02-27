@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avengers - Liste{% endblock %}
+
+{% block body %}
+<div class="max-w-4xl mx-auto mt-10 p-6">
+    <h1 class="text-3xl font-bold text-slate-800 mb-8 border-b-2 pb-4">Liste des Marque-pages</h1>
+
+    <div class="overflow-hidden rounded-lg border border-slate-200 shadow-md">
+        <table class="w-full border-collapse bg-white text-left text-sm text-slate-500">
+            <thead class="bg-slate-50">
+                <tr>
+                    <th class="px-6 py-4 font-semibold text-slate-900">URL</th>
+                    <th class="px-6 py-4 font-semibold text-slate-900">commentaireaires</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 border-t border-slate-100">
+                {% for bookmark in BookmarkController %}
+                <tr class="hover:bg-slate-50">
+                    <td class="px-6 py-4">
+                        <a href="{{ bookmark.url }}" target="_blank" class="text-indigo-600 hover:underline font-medium">
+                            {{ bookmark.url }}
+                        </a>
+                    </td>
+                    <td class="px-6 py-4 italic text-slate-600">
+                        {{ bookmark.commentaire ?: '—' }}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2" class="px-6 py-10 text-center text-slate-400">Aucun lien enregistré en base.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
