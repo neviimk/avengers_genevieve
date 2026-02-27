@@ -17,8 +17,9 @@ class BookmarkController extends AbstractController
     public function fct(EntityManagerInterface $entityManager): Response
     {
         $bookmarks = $entityManager->getRepository(Bookmark::class)->findAll();
+        
         return $this->render('bookmark/index.html.twig', [
-            'BookmarkController' => 'BookmarkController',
+            'BookmarkController' => $bookmarks,
         ]);
     }
 }
