@@ -11,9 +11,10 @@ use App\Repository\BookmarkRepository;
 
 use Doctrine\ORM\EntityManagerInterface;
 
+#[Route('/bookmark', requirements: ["_locale" => "en|es|fr"], name: 'app_bookmark_')]
 class BookmarkController extends AbstractController
 {
-    #[Route('/bookmark', name: 'app_bookmark')]
+    #[Route('', name: 'index')]
     public function fct(EntityManagerInterface $entityManager): Response
     {
         $bookmarks = $entityManager->getRepository(Bookmark::class)->findAll();
@@ -23,7 +24,22 @@ class BookmarkController extends AbstractController
         ]);
     }
 
-    #[Route("/bookmark/add", name: "bookmark_add")]
+    #[Route('/fiche/{id<\d+>}', name: 'fiche')]
+    public function getBookmark(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $bookmark = $entityManager->getRepository(Bookmark::class)->find($id);
+
+        if (!$bookmark) {
+            throw $this->createNotFoundException("Aucun bookmark avec l'id " . $id);
+        }
+
+        return $this->render('bookmark/bookmark.html.twig', [
+            'bookmark' => $bookmark
+        ]);
+    }
+
+
+    /* #[Route("/bookmark/add", name: "bookmark_add")]
     public function ajouterBookmark(EntityManagerInterface $entityManager): Response
     {
         $b1 = new Bookmark();
@@ -48,5 +64,5 @@ class BookmarkController extends AbstractController
         $entityManager->flush();
 
         return new Response("Trois marque-pages ont été ajoutés avec succès !");
-    }
+    } */
 }
