@@ -34,7 +34,7 @@
                                 <div class="h-10 w-10 flex-shrink-0 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                                     {{ loop.index }}
                                 </div>
-                                <a href="{{ bookmark.url }}" target="_blank" class="text-lg font-semibold text-gray-900 hover:text-indigo-600 break-all transition-colors">
+                                <a href={{ path('app_bookmark_fiche', {'id': bookmark.id}) }} class="text-lg font-semibold text-gray-900 hover:text-indigo-600 break-all transition-colors">
                                     {{ bookmark.url|replace({'https://': '', 'http://': ''})|u.truncate(40, '...') }}
                                 </a>
                             </div>

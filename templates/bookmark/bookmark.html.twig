@@ -45,6 +45,18 @@
                             {{ bookmark.commentaire }}
                         </dd>
                     </div>
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Mots-clés</dt>
+                        <dd class="flex flex-col space-y-2 items-start mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {% for keyword in bookmark.keywords %}
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 mr-2">
+                                    #{{ keyword.name }}
+                                </span>
+                            {% else %}
+                                <span class="text-gray-400 italic">Aucun mot-clé</span>
+                            {% endfor %}
+                        </dd>
+                    </div>
                 </dl>
             </div>
         </div>

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BookmarkRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,17 @@ class Bookmark
 
     #[ORM\Column]
     private ?\DateTime $date_creation = null;
+
+    /**
+     * @var Collection<int, Keyword>
+     */
+    #[ORM\ManyToMany(targetEntity: Keyword::class, mappedBy: 'bookmark')]
+    private Collection $keywords;
+
+    public function __construct()
+    {
+        $this->keywords = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +73,33 @@ class Bookmark
     public function setDateCreation(\DateTime $date_creation): static
     {
         $this->date_creation = $date_creation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Keyword>
+     */
+    public function getKeywords(): Collection
+    {
+        return $this->keywords;
+    }
+
+    public function addKeyword(Keyword $keyword): static
+    {
+        if (!$this->keywords->contains($keyword)) {
+            $this->keywords->add($keyword);
+            $keyword->addBookmark($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKeyword(Keyword $keyword): static
+    {
+        if ($this->keywords->removeElement($keyword)) {
+            $keyword->removeBookmark($this);
+        }
 
         return $this;
     }
