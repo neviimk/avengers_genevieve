@@ -13,12 +13,21 @@ php bin/console doctrine:database:create
 # 4. Création de l'entité Bookmark
 php bin/console make:entity Bookmark
 php bin/console make:entity Keyword
+php bin/console make:controller BookmarkController
 
-# 5. Génération de la migration et application à la base
+# 5. Création de l'entité Book
+php bin/console make:entity Book
+php bin/console make:controller BookController
+
+# 6. Création de la rubrique Cailloux
+php bin/console make:entity Cailloux
+php bin/console make:controller CaillouxController
+
+# 7. Génération de la migration et application à la base
 php bin/console make:migration
 php bin/console doctrine:migrations:migrate
 
-# 6. Commandes git pour relier mon projet à Github
+# 8. Commandes git pour relier mon projet à Github
     git branch -M main : Renommer ma branche principale 'main'
     git remote add origin https://github.com/neviimk/avengers_genevieve.git : Ajouter l'adresse de mon dépôt distant
     git push -u origin main : envoyer mon code pour la première fois vers le dépôt distant
