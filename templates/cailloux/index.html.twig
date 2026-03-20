@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Mes Cailloux{% endblock %}
+{% block content %}
+<div class="py-12 px-4 max-w-6xl mx-auto">
+
+    {# Header de la page #}
+        <div class="flex justify-between items-center mb-10 border-b border-gray-200 pb-6">
+            <div>
+                <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">
+                    <span class="text-indigo-600 italic">Cailloux</span>
+                </h1>
+                <p class="mt-2 text-sm text-gray-500 uppercase tracking-widest">{{ title }} !</p>
+            </div>
+            <div class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg">
+                {{ cailloux|length }} espèces
+            </div>
+        </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for caillou in cailloux %}
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow">
+                <img src="{{ asset(caillou.imageUrl) }}" alt="{{ caillou.title }}" class="w-full object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-2">{{ caillou.title }}</h2>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        {{ caillou.description }}
+                    </p>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-gray-400">Aucune espèce dans cette catégorie.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
