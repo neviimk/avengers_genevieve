@@ -33,3 +33,9 @@ php bin/console doctrine:migrations:migrate
     git push -u origin main : envoyer mon code pour la première fois vers le dépôt distant
     git push : envoyer mes sauvegardes locales vers Github
     git commit -m "Description" : Créer un point de sauvegarde avec un message descriptif 
+
+# 9. Fusion/Merge via le terminal
+git checkout main
+git pull origin main
+git merge Feat/Add-home-and-sections
+git push origin main
