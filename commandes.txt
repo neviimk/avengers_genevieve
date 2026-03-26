@@ -27,14 +27,21 @@ php bin/console make:controller CaillouxController
 php bin/console make:migration
 php bin/console doctrine:migrations:migrate
 
-# 8. Commandes git pour relier mon projet à Github
+# 8. Données de test (Fixtures)
+composer req --dev orm-fixtures
+php bin/console make:fixtures BooksFixtures
+php bin/console make:fixtures BookmarksFixtures
+php bin/console make:fixtures CaillouxFixtures
+php bin/console doctrine:fixtures:load -> vide la base et la remplit
+
+# 9. Commandes git pour relier mon projet à Github
     git branch -M main : Renommer ma branche principale 'main'
     git remote add origin https://github.com/neviimk/avengers_genevieve.git : Ajouter l'adresse de mon dépôt distant
     git push -u origin main : envoyer mon code pour la première fois vers le dépôt distant
     git push : envoyer mes sauvegardes locales vers Github
     git commit -m "Description" : Créer un point de sauvegarde avec un message descriptif 
 
-# 9. Fusion/Merge via le terminal
+# 10. Fusion/Merge via le terminal
 git checkout main
 git pull origin main
 git merge Feat/Add-home-and-sections
