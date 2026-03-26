@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<div class="py-12 px-4 max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6">Auteurs ayant écrit plus de {{ min }} livres</h1>
+
+    <ul class="bg-white shadow overflow-hidden sm:rounded-md">
+        {% for author in authors %}
+            <li class="px-6 py-4 border-b border-gray-200 last:border-0">
+                <span class="text-lg font-medium text-indigo-600">{{ author.name }}</span>
+            </li>
+        {% else %}
+            <li class="px-6 py-4 text-gray-500 italic">Aucun auteur ne correspond à ce critère.</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{{ path('app_book_index') }}" class="mt-6 inline-block text-indigo-600">← Retour aux livres</a>
+</div>
+{% endblock %}

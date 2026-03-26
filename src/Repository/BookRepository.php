@@ -16,6 +16,24 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function findByFirstLetter(string $letter): array
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.title LIKE :val')
+            ->setParameter('val', $letter . '%')
+            ->orderBy('b.title', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countAllBooks(): int
+    {
+        return $this->createQueryBuilder('b')
+            ->select('count(b.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return Book[] Returns an array of Book objects
     //     */

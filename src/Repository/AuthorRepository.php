@@ -16,6 +16,17 @@ class AuthorRepository extends ServiceEntityRepository
         parent::__construct($registry, Author::class);
     }
 
+    public function findAuthorsWithMoreThan(int $limit): array
+    {
+        return $this->createQueryBuilder('a')
+            ->innerJoin('App\Entity\Book', 'b', 'WITH', 'b.author = a.id')
+            ->groupBy('a.id')
+            ->having('COUNT(b.id) > :limit')
+            ->setParameter('limit', $limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Author[] Returns an array of Author objects
     //     */
